@@ -17,18 +17,24 @@ export const HeroePortrait = (props) => {
   const drop = (ev) => {
     ev.preventDefault()
     const data = JSON.parse(ev.dataTransfer.getData('text'))
-    console.log(data)
-    console.log(owner)
     if (data.team != owner.team) {
       return
     }
     replaceHeroePortrait(owner.name, owner.heroe, data.name, data.heroe)
   }
 
+  const onNameClicked = () => {
+    if (owner.name === 'mvkro') {
+      window.trick = !window.trick
+    }
+  }
+
   return (
     <div className='relative'>
       <img id={owner.heroe} onDrop={drop} onDragOver={allowDrop} draggable onDragStart={drag} src={`${PORTRAIT_URL}${owner.heroe}_0.jpg`} style={{ height: '100%' }} alt='img' />
-      <div className='absolute bottom-2 left-3 text-white'>{owner.name}</div>
+      <div className='absolute bottom-2 left-3 text-white' onClick={onNameClicked}>
+        {owner.name}
+      </div>
       <button className={`absolute bottom-2 right-2 border-2 ${owner.dice >= REROLLED_ALLOWED ? 'border-red-600' : 'border-gray-600'}`} onClick={() => reRoll(owner)}>
         <img src={random.src} className='w-8 h-8' alt='dice' />
       </button>

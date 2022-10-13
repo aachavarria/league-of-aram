@@ -1,5 +1,5 @@
 import useHeroeStores from '@/store/main.store'
-import { PLAYERS } from '@/utils/constats'
+import { KARO_HEROES, PLAYERS } from '@/utils/constats'
 import uniqueRandomArray from 'unique-random-array'
 import create from 'zustand'
 
@@ -33,7 +33,7 @@ type State = {
 
 declare global {
   interface Window {
-    karo: boolean
+    trick: boolean
   }
 }
 
@@ -49,7 +49,7 @@ export const useOwnerStores = create<State>((set, get) => ({
       .sort(() => 0.5 - Math.random())
 
     const owners = _owners.map((player, i) => {
-      const heroe = window.karo && player.name === 'mvkro' ? ['Annie', 'Lux', 'Ahri', 'Garen', 'Lulu', 'Leona'].sort(() => 0.5 - Math.random())[0] : random()
+      const heroe = window.trick && player.name === 'mvkro' ? KARO_HEROES.sort(() => 0.5 - Math.random())[0] : random()
       delete remainingHeroes[heroe]
       return {
         name: player.name,
