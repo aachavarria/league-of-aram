@@ -32,20 +32,22 @@ export default function Home() {
       </Head>
 
       <main
-        className='flex flex-col gap-3 p-8'
+        className='flex flex-col gap-3 p-8 h-screen pt-32'
         style={{
           backgroundImage: `url(${BACKGROUND_URL})`,
         }}
       >
-        <PlayerCheckboxes />
-        <button
-          type='button'
-          disabled={!ready}
-          onClick={onGenerateMatch}
-          className='self-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
-        >
-          WE ARE READY
-        </button>
+        <div className='absolute z-10 top-3 right-10 left-10 flex flex-col gap-2'>
+          <PlayerCheckboxes />
+          <button
+            type='button'
+            disabled={!ready}
+            onClick={onGenerateMatch}
+            className='self-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800'
+          >
+            WE ARE READY
+          </button>
+        </div>
         <TeamDisplayer team={0} />
         <TeamDisplayer team={1} />
       </main>

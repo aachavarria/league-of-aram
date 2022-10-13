@@ -6,8 +6,8 @@ export const TeamDisplayer = (props) => {
   const { team } = props
   const { owners, reRoll, reRolledHeroes } = useOwnerStores()
   return (
-    <div className='flex'>
-      <div className='flex flex-col gap-2 mr-3'>
+    <div className='flex h-3/6 relative'>
+      <div className='grid grid-cols-2 gap-2 mr-3 absolute'>
         {reRolledHeroes
           .filter((heroe) => heroe.team === team)
           .map((heroe, i) => (

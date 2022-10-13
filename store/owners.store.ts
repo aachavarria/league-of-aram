@@ -64,7 +64,6 @@ export const useOwnerStores = create<State>((set, get) => ({
     useHeroeStores.setState({ remainingHeroes })
   },
   togglePlayer: (name, checked) => {
-    console.log(name, checked)
     const players = [...get().players]
     const player = players.find((player) => player.name === name)
     player.checked = checked
