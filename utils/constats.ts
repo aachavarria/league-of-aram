@@ -4,6 +4,8 @@ export const AVATAR_URL = 'http://ddragon.leagueoflegends.com/cdn/12.19.1/img/ch
 
 export const BACKGROUND_URL = 'https://cdna.artstation.com/p/assets/images/images/004/504/342/large/carlos-ruiz-winter-sru-final-sm.jpg?1484150590'
 
+export const REROLLED_ALLOWED = 1
+
 export const PLAYERS = [
   {
     name: 'Yurei',
