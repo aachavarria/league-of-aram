@@ -8,7 +8,7 @@ export const HeroePortrait = (props) => {
       <img src={`${PORTRAIT_URL}${owner.heroe}_0.jpg`} style={{ height: '100%' }} alt='img' />
       <div className='absolute bottom-2 left-3 text-white'>{owner.name}</div>
       <button className='absolute bottom-2 right-2' onClick={() => onReroll(owner)}>
-        <img src={random.src} className='w-8 h-8' />
+        <img src={random.src} className='w-8 h-8' alt='dice' />
       </button>
     </div>
   )
