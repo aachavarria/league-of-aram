@@ -56,5 +56,3 @@ export const PLAYERS = [
     checked: false,
   },
 ]
-
-export const KARO_HEROES = ['Annie', 'Lux', 'Ahri', 'Garen', 'Lulu', 'Leona', 'Renekton', 'Nidalee', 'Ashe', 'Poppy', 'Zyra']

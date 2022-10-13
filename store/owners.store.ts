@@ -1,5 +1,5 @@
 import useHeroeStores from '@/store/main.store'
-import { KARO_HEROES, PLAYERS } from '@/utils/constats'
+import { PLAYERS } from '@/utils/constats'
 import uniqueRandomArray from 'unique-random-array'
 import create from 'zustand'
 
@@ -31,32 +31,36 @@ type State = {
   replaceHeroePortrait: (ownerName: string, ownerHero: string, dropOwner: string, dropHero: string) => void
 }
 
-declare global {
-  interface Window {
-    trick: boolean
-  }
-}
-
 export const useOwnerStores = create<State>((set, get) => ({
   owners: [],
   reRolledHeroes: [],
   players: PLAYERS,
   generateMatch: async () => {
     const { remainingHeroes } = useHeroeStores.getState()
-    const random = uniqueRandomArray(Object.values(remainingHeroes).map((heroe) => heroe.id))
+    const heroes = Object.values({ ...remainingHeroes })
+    const random = uniqueRandomArray(heroes.map((heroe) => heroe.id))
     const _owners = get()
       .players.filter(({ checked }) => checked)
       .sort(() => 0.5 - Math.random())
 
+    const toDelete = []
+
     const owners = _owners.map((player, i) => {
-      const heroe = window.trick && player.name === 'mvkro' ? KARO_HEROES.sort(() => 0.5 - Math.random())[0] : random()
-      delete remainingHeroes[heroe]
+      let heroe = null
+      do {
+        heroe = random()
+      } while (toDelete.includes(heroe))
+      toDelete.push(heroe)
       return {
         name: player.name,
         team: i < _owners.length / 2 ? 0 : 1,
         heroe,
         dice: 0,
       }
+    })
+
+    toDelete.forEach((name) => {
+      delete remainingHeroes[name]
     })
 
     useHeroeStores.setState({ remainingHeroes })
