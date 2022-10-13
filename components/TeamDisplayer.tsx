@@ -11,7 +11,7 @@ export const TeamDisplayer = (props) => {
         {reRolledHeroes
           .filter((heroe) => heroe.team === team)
           .map((heroe, i) => (
-            <HeroeAvatar key={i} name={heroe.id} />
+            <HeroeAvatar key={i} name={heroe.id} team={team} />
           ))}
       </div>
       <section className='flex w-full gap-3 mb-3 justify-center'>

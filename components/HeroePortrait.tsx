@@ -11,12 +11,17 @@ export const HeroePortrait = (props) => {
   }
 
   const drag = (ev) => {
-    ev.dataTransfer.setData('text', JSON.stringify({ heroe: ev.target.id, name: owner.name }))
+    ev.dataTransfer.setData('text', JSON.stringify({ heroe: ev.target.id, name: owner.name, team: owner.team }))
   }
 
   const drop = (ev) => {
     ev.preventDefault()
     const data = JSON.parse(ev.dataTransfer.getData('text'))
+    console.log(data)
+    console.log(owner)
+    if (data.team != owner.team) {
+      return
+    }
     replaceHeroePortrait(owner.name, owner.heroe, data.name, data.heroe)
   }
 

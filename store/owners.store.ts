@@ -31,6 +31,12 @@ type State = {
   replaceHeroePortrait: (ownerName: string, ownerHero: string, dropOwner: string, dropHero: string) => void
 }
 
+declare global {
+  interface Window {
+    karo: boolean
+  }
+}
+
 export const useOwnerStores = create<State>((set, get) => ({
   owners: [],
   reRolledHeroes: [],
@@ -43,7 +49,7 @@ export const useOwnerStores = create<State>((set, get) => ({
       .sort(() => 0.5 - Math.random())
 
     const owners = _owners.map((player, i) => {
-      const heroe = random()
+      const heroe = window.karo && player.name === 'mvkro' ? ['Annie', 'Lux', 'Ahri', 'Garen', 'Lulu', 'Leona'].sort(() => 0.5 - Math.random())[0] : random()
       delete remainingHeroes[heroe]
       return {
         name: player.name,
