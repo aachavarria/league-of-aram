@@ -15,14 +15,20 @@ interface Player {
   checked: boolean
 }
 
+interface Heroe {
+  id: string
+  team: number
+}
+
 type State = {
   owners: Owner[]
-  reRolledHeroes: any
+  reRolledHeroes: Heroe[]
   players: Player[]
   generateMatch: () => void
   reRoll: (owner: Owner) => void
   togglePlayer: (owner: string, checked: boolean) => void
   reset: () => void
+  replaceHeroePortrait: (ownerName: string, ownerHero: string, dropOwner: string, dropHero: string) => void
 }
 
 export const useOwnerStores = create<State>((set, get) => ({
@@ -61,12 +67,32 @@ export const useOwnerStores = create<State>((set, get) => ({
     one.heroe = heroe
     one.dice = one.dice + 1
     delete remainingHeroes[heroe]
+    set({ owners: _owners })
     useHeroeStores.setState({ remainingHeroes })
   },
   togglePlayer: (name, checked) => {
     const players = [...get().players]
     const player = players.find((player) => player.name === name)
     player.checked = checked
+  },
+  replaceHeroePortrait: (ownerName: string, ownerHero: string, dropOwner: string, dropHero: string) => {
+    const _owners = [...get().owners]
+    const _reRolledHeroes = [...get().reRolledHeroes]
+    if (ownerName) {
+      const one = _owners.find((_owner) => _owner.name === ownerName)
+      one.heroe = dropHero
+    } else {
+      const avatar = _reRolledHeroes.find((hero) => hero.id === ownerHero)
+      avatar.id = dropHero
+    }
+    if (!dropOwner) {
+      const avatar2 = _reRolledHeroes.find((hero) => hero.id === dropHero)
+      avatar2.id = ownerHero
+    } else {
+      const two = _owners.find((_owner) => _owner.name === dropOwner)
+      two.heroe = ownerHero
+    }
+    set({ owners: _owners, reRolledHeroes: _reRolledHeroes })
   },
   reset: () => {
     set({ owners: [], reRolledHeroes: [] })

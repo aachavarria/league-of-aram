@@ -4,7 +4,7 @@ import useOwnerStores from '@/store/owners.store'
 
 export const TeamDisplayer = (props) => {
   const { team } = props
-  const { owners, reRoll, reRolledHeroes } = useOwnerStores()
+  const { owners, reRolledHeroes } = useOwnerStores()
   return (
     <div className='flex h-3/6 relative'>
       <div className='grid grid-cols-2 gap-2 mr-3 absolute'>
@@ -18,7 +18,7 @@ export const TeamDisplayer = (props) => {
         {owners
           .filter((owner) => owner.team === team)
           .map((owner, i) => (
-            <HeroePortrait key={i} owner={owner} onReroll={reRoll} />
+            <HeroePortrait key={i} owner={owner} />
           ))}
       </section>
     </div>
