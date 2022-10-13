@@ -51,6 +51,10 @@ export const PLAYERS = [
     name: 'Lulu',
     checked: false,
   },
+  {
+    name: 'Playazo',
+    checked: false,
+  },
 ]
 
 export const KARO_HEROES = ['Annie', 'Lux', 'Ahri', 'Garen', 'Lulu', 'Leona', 'Renekton', 'Nidalee', 'Ashe', 'Poppy', 'Zyra']
